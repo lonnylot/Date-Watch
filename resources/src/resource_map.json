@@ -1,0 +1,11 @@
+
+{"friendlyVersion": "1.0",
+ "versionDefName": "L_L_IDEAS_DATE_WATCH",
+ "media": [
+	   {
+	    "type":"raw",
+	    "defName":"DUMMY",
+	    "file":"resource_map.json"
+	   }
+	  ]
+}
