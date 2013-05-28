@@ -32,6 +32,11 @@ char current_date_string[DATE_TEXT_CHARS];
 
 void convert_ones_to_name(unsigned int *number, char *name) {
   switch(*number) {
+    case 0: 
+    case 12: {
+      strcpy(name, "twelve");
+      break;
+    }
     case 1: {
       strcpy(name, "one");
       break;
@@ -76,46 +81,6 @@ void convert_ones_to_name(unsigned int *number, char *name) {
       strcpy(name, "eleven");
       break;
     }
-    case 12: {
-      strcpy(name, "twelve");
-    }
-    default: {
-      strcpy(name, "");
-      break;
-    }
-  }
-}
-
-void convert_ones_to_teen_name(unsigned int *number, char *name) {
-  switch(*number) {
-    case 3: {
-      strcpy(name, "thir");
-      break;
-    }
-    case 4: {
-      strcpy(name, "four");
-      break;
-    }
-    case 5: {
-      strcpy(name, "fif");
-      break;
-    }
-    case 6: {
-      strcpy(name, "six");
-      break;
-    }
-    case 7: {
-      strcpy(name, "seven");
-      break;
-    }
-    case 8: {
-      strcpy(name, "eight");
-      break;
-    }
-    case 9: {
-      strcpy(name, "nine");
-      break;
-    }
     default: {
       strcpy(name, "");
       break;
@@ -148,30 +113,73 @@ void convert_tens_to_name(unsigned int *number, char *name) {
   }
 }
 
+void convert_to_teen_name(int *number, char *name, char *name_2) {
+  switch(*number) {
+    case 13: {
+      strcpy(name, "thirteen");
+      strcpy(name_2, "");
+      break;
+    }
+    case 14: {
+      strcpy(name, "four");
+      strcpy(name_2, "teen");
+      break;
+    }
+    case 15: {
+      strcpy(name, "fifteen");
+      strcpy(name_2, "");
+      break;
+    }
+    case 16: {
+      strcpy(name, "sixteen");
+      strcpy(name_2, "");
+      break;
+    }
+    case 17: {
+      strcpy(name, "seven");
+      strcpy(name_2, "teen");
+      break;
+    }
+    case 18: {
+      strcpy(name, "eight");
+      strcpy(name_2, "teen");
+      break;
+    }
+    case 19: {
+      strcpy(name, "nine");
+      strcpy(name_2, "teen");
+      break;
+    }
+    default: {
+      strcpy(name, "");
+      strcpy(name_2, "");
+      break;
+    }
+  }
+}
+
 void update_time(PblTm *pebble_time) {
   unsigned int hour, minute, minute_2;
+  static PropertyAnimation minute_2_animation;
 
   // Get our hour string
   hour = pebble_time->tm_hour % 12;
-  if( hour == 0 ) {
-    strcpy(current_hour_string, "twelve");
-  } else {
-    convert_ones_to_name(&hour, current_hour_string);
-  }
+  convert_ones_to_name(&hour, current_hour_string);
+  
   // Set our hour text
   text_layer_set_text(&current_hour, current_hour_string);
 
   // Get our minute and minute_2 strings
-  if( pebble_time->tm_min < 13 ) {
-    // Handle the sub 'teens'
-    minute = pebble_time->tm_min;
-    convert_ones_to_name(&minute, current_minute_string);
+  if(pebble_time->tm_min == 0) {
+    strcpy(current_minute_string, "o'clock");
     strcpy(current_minute_2_string, "");
+  } else if( pebble_time->tm_min < 13 ) {
+    // Handle the sub 'teens'
+    minute = pebble_time->tm_min;  
+    convert_ones_to_name(&minute, current_minute_string);
   } else if( pebble_time->tm_min < 20 ) {
     // Handle the 'teens'
-    minute = pebble_time->tm_min % 10;
-    convert_ones_to_teen_name(&minute, current_minute_string);
-    strcpy(current_minute_2_string, "teen");
+    convert_to_teen_name(&(pebble_time->tm_min), current_minute_string, current_minute_2_string);
   } else {
     // Handle the 'tens'
     minute = (int)(pebble_time->tm_min * .1);
