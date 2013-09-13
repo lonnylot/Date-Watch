@@ -30,329 +30,248 @@ char current_minute_2_string[MINUTE_2_TEXT_CHARS];
 #define DATE_TEXT_CHARS 8
 char current_date_string[DATE_TEXT_CHARS];
 
-typedef struct animation_data {
-  PropertyAnimation animate_in;
-  char updated_text;
-  TextLayer *textlayer;
-  GRect from_frame;
-  GRect to_frame;
-} animation_data;
-
-struct animation_data hour_animation_data;
-struct animation_data minute_animation_data;
-struct animation_data minute_2_animation_data;
-
-typedef enum {
-  ANIMATION_HOUR = 0,
-  ANIMATION_MINUTE = 1,
-  ANIMATION_MINUTE_2 = 2
-} animation_types;
-
-void convert_hours_to_name(unsigned int *number, char *name) {
+void convert_hours_to_name(unsigned int *number) {
   switch(*number) {
     case 0: {
-      strcpy(name, "twelve");
+      strcpy(current_hour_string, "twelve");
       break;
     }
     case 1: {
-      strcpy(name, "one");
+      strcpy(current_hour_string, "one");
       break;
     }
     case 2: {
-      strcpy(name, "two");
+      strcpy(current_hour_string, "two");
       break;
     }
     case 3: {
-      strcpy(name, "three");
+      strcpy(current_hour_string, "three");
       break;
     }
     case 4: {
-      strcpy(name, "four");
+      strcpy(current_hour_string, "four");
       break;
     }
     case 5: {
-      strcpy(name, "five");
+      strcpy(current_hour_string, "five");
       break;
     }
     case 6: {
-      strcpy(name, "six");
+      strcpy(current_hour_string, "six");
       break;
     }
     case 7: {
-      strcpy(name, "seven");
+      strcpy(current_hour_string, "seven");
       break;
     }
     case 8: {
-      strcpy(name, "eight");
+      strcpy(current_hour_string, "eight");
       break;
     }
     case 9: {
-      strcpy(name, "nine");
+      strcpy(current_hour_string, "nine");
       break;
     }
     case 10: {
-      strcpy(name, "ten");
+      strcpy(current_hour_string, "ten");
       break;
     }
     case 11: {
-      strcpy(name, "eleven");
+      strcpy(current_hour_string, "eleven");
       break;
     }
     default: {
-      strcpy(name, "");
+      strcpy(current_hour_string, "");
       break;
     }
   }
 }
 
-void convert_minute_to_name(int *number, char *name) {
+void convert_minute_to_name(int *number) {
   if (*number < 20) {
     switch(*number) {
       case 0: {
-        strcpy(name, "o'clock");
+        strcpy(current_minute_string, "o'clock");
         break;
       }
       case 1: {
-        strcpy(name, "one");
+        strcpy(current_minute_string, "one");
         break;
       }
       case 2: {
-        strcpy(name, "two");
+        strcpy(current_minute_string, "two");
         break;
       }
       case 3: {
-        strcpy(name, "three");
+        strcpy(current_minute_string, "three");
         break;
       }
       case 4: {
-        strcpy(name, "four");
+        strcpy(current_minute_string, "four");
         break;
       }
       case 5: {
-        strcpy(name, "five");
+        strcpy(current_minute_string, "five");
         break;
       }
       case 6: {
-        strcpy(name, "six");
+        strcpy(current_minute_string, "six");
         break;
       }
       case 7: {
-        strcpy(name, "seven");
+        strcpy(current_minute_string, "seven");
         break;
       }
       case 8: {
-        strcpy(name, "eight");
+        strcpy(current_minute_string, "eight");
         break;
       }
       case 9: {
-        strcpy(name, "nine");
+        strcpy(current_minute_string, "nine");
         break;
       }
       case 10: {
-        strcpy(name, "ten");
+        strcpy(current_minute_string, "ten");
         break;
       }
       case 11: {
-        strcpy(name, "eleven");
+        strcpy(current_minute_string, "eleven");
         break;
       }
       case 12: {
-        strcpy(name, "twelve");
+        strcpy(current_minute_string, "twelve");
         break;
       }
       case 13: {
-        strcpy(name, "thirteen");
+        strcpy(current_minute_string, "thirteen");
         break;
       }
       case 14: {
-        strcpy(name, "four");
+        strcpy(current_minute_string, "four");
         break;
       }
       case 15: {
-        strcpy(name, "fifteen");
+        strcpy(current_minute_string, "fifteen");
         break;
       }
       case 16: {
-        strcpy(name, "sixteen");
+        strcpy(current_minute_string, "sixteen");
         break;
       }
       case 17: {
-        strcpy(name, "seven");
+        strcpy(current_minute_string, "seven");
         break;
       }
       case 18: {
-        strcpy(name, "eight");
+        strcpy(current_minute_string, "eight");
         break;
       }
       case 19: {
-        strcpy(name, "nine");
+        strcpy(current_minute_string, "nine");
         break;
       }
       default: {
-        strcpy(name, "");
+        strcpy(current_minute_string, "");
         break;
       }
     }
   } else if(*number < 30) {
-    strcpy(name, "twenty");
+    strcpy(current_minute_string, "twenty");
   } else if(*number < 40) {
-    strcpy(name, "thirty");
+    strcpy(current_minute_string, "thirty");
   } else if(*number < 50) {
-    strcpy(name, "forty");
+    strcpy(current_minute_string, "forty");
   } else {
-    strcpy(name, "fifty");
+    strcpy(current_minute_string, "fifty");
   }
 }
 
-void convert_minute_2_to_name(int number, char *name) {
+void convert_minute_2_to_name(int number) {
   switch(number) {
     case 14:
     case 17:
     case 18:
     case 19: {
-      strcpy(name, "teen");
+      strcpy(current_minute_2_string, "teen");
+      break;
+    }
+    case 1: {
+      strcpy(current_minute_2_string, "one");
+      break;
+    }
+    case 2: {
+      strcpy(current_minute_2_string, "two");
+      break;
+    }
+    case 3: {
+      strcpy(current_minute_2_string, "three");
+      break;
+    }
+    case 4: {
+      strcpy(current_minute_2_string, "four");
+      break;
+    }
+    case 5: {
+      strcpy(current_minute_2_string, "five");
+      break;
+    }
+    case 6: {
+      strcpy(current_minute_2_string, "six");
+      break;
+    }
+    case 7: {
+      strcpy(current_minute_2_string, "seven");
+      break;
+    }
+    case 8:  {
+      strcpy(current_minute_2_string, "eight");
+      break;
+    }
+    case 9: {
+      strcpy(current_minute_2_string, "nine");
       break;
     }
     case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8: 
-    case 9:
     default: {
-      strcpy(name, "");
+      strcpy(current_minute_2_string, "");
       break;
     }
-  }
-}
-
-void current_animation_out_stopped(Animation *animation, bool finished, void *data){
-  struct animation_data *animation_info;
-  animation_types animation_type;
-  animation_type = (int)data;
-
-  switch(animation_type) {
-    case ANIMATION_HOUR: {
-      animation_info = &hour_animation_data;
-      // Update our layer text
-      strcpy(current_hour_string, &(*animation_info).updated_text);
-      break;
-    }
-    case ANIMATION_MINUTE: {
-      animation_info = &minute_animation_data;
-      // Update our layer text
-      strcpy(current_minute_string, &(*animation_info).updated_text);
-      break;
-    }
-    case ANIMATION_MINUTE_2:
-    default: {
-      animation_info = &minute_2_animation_data;
-      // Update our layer text
-      strcpy(current_minute_2_string, &(*animation_info).updated_text);
-      break;
-    }
-  }
-  
-  if(animation_info->animate_in.subject == NULL){
-    // Initialize our animation layer
-    property_animation_init_layer_frame(
-      &animation_info->animate_in, &animation_info->textlayer->layer, 
-      &animation_info->from_frame, &animation_info->to_frame
-    );
-    animation_set_duration(&animation_info->animate_in.animation, 500);
-    animation_set_curve(&animation_info->animate_in.animation, AnimationCurveEaseIn);
-  }
-
-  if(animation_is_scheduled(&animation_info->animate_in.animation) == false) {
-    animation_schedule(&animation_info->animate_in.animation);
   }
 }
 
 void schedule_hours(int *pebble_hour) {
-  static PropertyAnimation animation_out;
-  GRect to_frame_out = GRect(-144, 30, 144, 43);
   unsigned int hour;
-  static animation_types animation_type = ANIMATION_HOUR;
 
   // Get our new updated text
   hour = *pebble_hour % 12;
-  convert_hours_to_name(&hour, &hour_animation_data.updated_text);
+  convert_hours_to_name(&hour);
 
-  if ((&animation_out)->subject == NULL) {
-    // Initialize our animation layer
-    property_animation_init_layer_frame(
-      &animation_out, &current_hour.layer, NULL, &to_frame_out
-    );
-    animation_set_duration(&animation_out.animation, 500);
-    animation_set_curve(&animation_out.animation, AnimationCurveEaseOut);
-    animation_set_handlers(&animation_out.animation, (AnimationHandlers) {
-      .stopped = (AnimationStoppedHandler) current_animation_out_stopped
-    }, (void *) animation_type);
-  }
-
-  if(animation_is_scheduled(&animation_out.animation) == false) {
-    animation_schedule(&animation_out.animation);
-  }
+  text_layer_set_text(&current_hour, current_hour_string);
 }
 
 void schedule_minute(int *pebble_minute) {
-  static PropertyAnimation animation_out;
-  GRect to_frame_out = GRect(-144, 65, 144, 50);
-  static animation_types animation_type = ANIMATION_MINUTE;
-
   // Get our new updated text
-  convert_minute_to_name(pebble_minute, &minute_animation_data.updated_text);
+  convert_minute_to_name(pebble_minute);
 
-  if ((&animation_out)->subject == NULL) {
-    // Initialize our animation layer
-    property_animation_init_layer_frame(
-      &animation_out, &current_minute.layer, NULL, &to_frame_out
-    );
-    animation_set_duration(&animation_out.animation, 500);
-    animation_set_curve(&animation_out.animation, AnimationCurveEaseOut);
-    animation_set_handlers(&animation_out.animation, (AnimationHandlers) {
-      .stopped = (AnimationStoppedHandler) current_animation_out_stopped
-    }, (void *) animation_type);
-  }
-
-  if(animation_is_scheduled(&animation_out.animation) == false) {
-    animation_schedule(&animation_out.animation);
-  }
+  text_layer_set_text(&current_minute, current_minute_string);
 }
 
 void schedule_minute_2(int *pebble_minute) {
-  static PropertyAnimation animation_out;
-  GRect to_frame_out = GRect(-144, 103, 144, 50);
   int min;
-  static animation_types animation_type = ANIMATION_MINUTE_2;
 
   // Get our new updated text
-  if(*pebble_minute < 20){
+  if(*pebble_minute > 20 && *pebble_minute % 10 != 0) {
     min = *pebble_minute % 10;
+    convert_minute_2_to_name(min);
+  } else if(*pebble_minute == 14) {
+    convert_minute_2_to_name(*pebble_minute);
+  } else if(*pebble_minute >= 17 && *pebble_minute <= 19){
+    convert_minute_2_to_name(*pebble_minute);
   } else {
-    min = *pebble_minute;
+    convert_minute_2_to_name(0);
   }
-  convert_minute_2_to_name(min, &minute_2_animation_data.updated_text);
 
-  if ((&animation_out)->subject == NULL) {
-    // Initialize our animation layer
-    property_animation_init_layer_frame(
-      &animation_out, &current_minute_2.layer, NULL, &to_frame_out
-    );
-    animation_set_duration(&animation_out.animation, 500);
-    animation_set_curve(&animation_out.animation, AnimationCurveEaseOut);
-    animation_set_handlers(&animation_out.animation, (AnimationHandlers) {
-      .stopped = (AnimationStoppedHandler) current_animation_out_stopped
-    }, (void *) animation_type);
-  }
-  
-  if(animation_is_scheduled(&animation_out.animation) == false) {
-    animation_schedule(&animation_out.animation);
-  }
+  text_layer_set_text(&current_minute_2, current_minute_2_string);
 }
 
 void update_time(PblTm *pebble_time) {
@@ -360,26 +279,26 @@ void update_time(PblTm *pebble_time) {
     // Update hour
     schedule_hours(&(pebble_time->tm_hour));
     // Update minute to "o'clock"
-    //schedule_minute(&(pebble_time->tm_min));
+    schedule_minute(&(pebble_time->tm_min));
     // Update minute_2 to ""
-    //schedule_minute_2(&(pebble_time->tm_min));
+    schedule_minute_2(&(pebble_time->tm_min));
   } else if(pebble_time->tm_min < 13) {
     // Update minute to ones
-    //schedule_minute(&(pebble_time->tm_min));
+    schedule_minute(&(pebble_time->tm_min));
   } else if(pebble_time->tm_min < 20) {
     // Update minute and minute_2 to teens
-    //schedule_minute(&(pebble_time->tm_min));
-    //schedule_minute_2(&(pebble_time->tm_min));
+    schedule_minute(&(pebble_time->tm_min));
+    schedule_minute_2(&(pebble_time->tm_min));
   } else if(pebble_time->tm_min % 10 == 0) {
     // Update minute to tens
-    //schedule_minute(&(pebble_time->tm_min));
+    schedule_minute(&(pebble_time->tm_min));
     // Update minute_2 to ""
-    //schedule_minute_2(&(pebble_time->tm_min));
+    schedule_minute_2(&(pebble_time->tm_min));
   } else {
     // Update minute to tens
-    //schedule_minute(&(pebble_time->tm_min));
+    schedule_minute(&(pebble_time->tm_min));
     // Update minute_2 to ones
-    //schedule_minute_2(&(pebble_time->tm_min));
+    schedule_minute_2(&(pebble_time->tm_min));
   }
 }
 
@@ -396,19 +315,6 @@ void handle_tick(AppContextRef ctx, PebbleTickEvent *event){
 
 void handle_init(AppContextRef ctx) {
   (void)ctx;
-
-  // Set our static animation_data structs from/to fields
-  hour_animation_data.from_frame = GRect(144, 30, 144, 43);
-  hour_animation_data.to_frame = GRect(0, 30, 144, 43);
-  minute_animation_data.from_frame = GRect(144, 65, 144, 50);
-  minute_animation_data.to_frame = GRect(0, 65, 144, 50);
-  minute_2_animation_data.from_frame = GRect(144, 103, 144, 50);
-  minute_2_animation_data.to_frame = GRect(0, 103, 144, 50);
-
-  // Set our static animation_data structs textlayer fields
-  hour_animation_data.textlayer = &current_hour;
-  minute_animation_data.textlayer = &current_minute;
-  minute_2_animation_data.textlayer = &current_minute_2;
 
   window_init(&window, "Date Text");
   window_stack_push(&window, true /* Animated */);
@@ -446,9 +352,9 @@ void handle_init(AppContextRef ctx) {
   // Do the initial rendering of our layer content
   PblTm pebble_time;
   get_time(&pebble_time);
-  //schedule_hours(&(pebble_time.tm_hour));
-  //schedule_minute(&(pebble_time.tm_min));
-  //schedule_minute_2(&(pebble_time.tm_min));
+  schedule_hours(&(pebble_time.tm_hour));
+  schedule_minute(&(pebble_time.tm_min));
+  schedule_minute_2(&(pebble_time.tm_min));
   update_date(&pebble_time);
   
   // Set the text for our text layers
@@ -462,15 +368,7 @@ void handle_init(AppContextRef ctx) {
   layer_add_child(&window.layer, &current_minute.layer);
   layer_add_child(&window.layer, &current_hour.layer);
   layer_add_child(&window.layer, &current_date.layer);
-  APP_LOG( APP_LOG_LEVEL_DEBUG, "works!" );
 }
-
-void handle_deinit(AppContextRef ctx) {
-  (void)ctx;
-
-  animation_unschedule_all();
-}
-
 
 void pbl_main(void *params) {
   PebbleAppHandlers handlers = {
@@ -478,8 +376,7 @@ void pbl_main(void *params) {
     .tick_info = {
       .tick_handler = &handle_tick,
       .tick_units = MINUTE_UNIT
-    },
-    .deinit_handler = &handle_deinit
+    }
   };
   app_event_loop(params, &handlers);
 }
